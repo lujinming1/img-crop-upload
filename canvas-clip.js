@@ -263,10 +263,7 @@
 				};
 				_self.cutRect = cutRect;
 				_self.clip();
-			}else{
-				_self.preview.src = '';
 			}
-
 		}
 	}
 
