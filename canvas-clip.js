@@ -48,7 +48,7 @@
 
 		this._isCliped = false;
 		this._isRectChanged = false;
-		
+
 
 		_self = this;
 		this.init();
@@ -208,6 +208,8 @@
 					if(!_self._isCliped){
 						_self._isRectChanged = true;
 						var p = getCoordinate(e);
+						(p.x < cutRect.x) && (p.x = cutRect.x);
+						(p.y < cutRect.y) && (p.y = cutRect.y);
 						cutRect.width = p.x - cutRect.x;
 						// cutRect.height = p.y - cutRect.y;
 						cutRect.height = p.x - cutRect.x;
@@ -250,7 +252,7 @@
 		function touchUpHandler(e){
 			_self._isMouseDown = false;
 			addCursor(e);
-			if(_self._isMouseMoved){
+			if(_self._isMouseMoved && (cutRect.width > 0)){
 				_self._isMouseMoved = false;
 				_self._isCliped = true;
 				cutRect = {
@@ -260,8 +262,11 @@
 					height: Math.abs(cutRect.height) - _self.clipLineWidth
 				};
 				_self.cutRect = cutRect;
+				_self.clip();
+			}else{
+				_self.preview.src = '';
 			}
-			_self.clip();
+
 		}
 	}
 
