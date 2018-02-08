@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag_dop_img</title>
+    <script type="text/javascript" src="canvas-clip.js"></script>
+    <style>
+        .bg{
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.3);
+            z-index: 500;
+        }
+        .box{
+            position: relative;
+            background: #fff;
+            width: 700px;
+            height: 550px;
+            max-width: 100%;
+            padding: 20px;
+            box-shadow: 0px 0px 7px 0px;
+        }
+        .file-button{
+            padding: 20px 20px 0 20px;
+        }
+        .file-button button{
+            height: 30px;
+        }
+        .file-button input{
+            position: absolute;
+            z-index: -1;
+        }
+        .content{
+            display: flex;
+            height: 450px;
+            padding: 10px;
+        }
+        .content .original{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            height: 430px;
+            padding-right: 20px;
+            border-right: 1px solid silver;
+            padding-top: 10px;
+        }
+        .content .preview-box{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 250px;
+        }
+        .content .preview-box .preview{
+            width: 200px;
+            height: 200px;
+        }
+        .button-box{
+            position: absolute;
+            right: 100px;
+            margin-top: 5px;
+        }
+        .button-box button{
+            height: 25px;
+            margin-left: 20px;
+        }
+        .close-btn{
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 25px;
+            font-style: normal;
+            color: #919191;
+        }
+        .close-btn:before{
+            content: "╳";
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="box">
+            <i class="close-btn"></i>
+            <div class="file-button">
+                <button onclick="chooseImg()">选择本地照片</button>
+                <input id="imgInput" type="file">
+            </div>
+            <div class="content">
+                <div class="original">
+                    <img class="placeholder" src="" height="200" width="200">
+                </div>
+                <div class="preview-box">
+                    <img class="preview" src="">
+                </div>
+
+            </div>
+            <div class="button-box">
+                <button class="confirm">确认</button>
+                <button class="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+    <script>
+		function chooseImg(){
+			document.getElementById('imgInput').click();
+        }
+        var c;
+		imgInput.onchange = function(){
+			var file = this.files[0];
+			if(file){
+				if(!/image\/\w+/.test(file.type)){
+					alert('不是图片');
+					return false;
+				}
+				document.querySelector('.placeholder').style.display = 'none';
+			}else{
+				return false;
+            }
+            c = new CanvasClip({
+                previewContainer: document.querySelector('.original'),
+                source: file,
+                preview: document.querySelector('.preview')
+            })
+		};
+    </script>
+</body>
+</html>

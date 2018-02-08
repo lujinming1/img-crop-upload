@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽测试</title>
+</head>
+<script>
+    function drag(event){
+		event.dataTransfer.setData("Img1",event.target.id);
+	}
+	function allowDrop(event){
+    	event.preventDefault();
+    }
+    function drop(event){
+		event.preventDefault();
+		var data = event.dataTransfer.getData("Img1");
+		event.target.appendChild(document.getElementById(data));
+    }
+</script>
+<body>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 250px; height: 250px"></div>
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 250px; height: 250px">
+        <img id="drag1" src="./images/normal.png" draggable="true" ondragstart="drag(event)"/>
+    </div>
+
+
+</body>
+</html>
