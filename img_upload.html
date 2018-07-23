@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FileReaderTest</title>
+</head>
+<body>
+<input type="file" id="formData" accept="image/*">
+<img src="" id="preview" alt="" style="display:block">
+<input type="file" id="fileReader" accept="image/*">
+<script>
+    formData.onchange = function(e){
+		var file = this.files[0];
+        var files = e.target.files;
+        console.log(file);
+        console.log(files);
+        if(!/image\/\w+/.test(file.type)){
+            alert('不是图片');
+			return false;
+        }
+
+        var xhr = new XMLHttpRequest();
+
+
+        var formData = new FormData();
+        formData.append('file', file);
+
+        xhr.open('post', "http://localhost:8888");
+        xhr.withCredentials = true;
+        // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');  https://itbilu.com/javascript/js/VkiXuUcC.html
+        // xhr.setRequestHeader('Content-Type', 'multipart/form-data'); 会覆盖默认的值，默认值带数据边界描述
+        xhr.send(formData);
+
+	};
+    fileReader.onchange = function() {
+        var file = this.files[0];
+
+        if(!/image\/\w+/.test(file.type)){
+            alert('不是图片');
+            return false;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var xhr = new XMLHttpRequest();
+            preview.src = this.result;
+            xhr.withCredentials = true;
+            xhr.open('post', "http://localhost:9999");
+            xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+            xhr.send(this.result);
+        };
+
+        if(file) reader.readAsDataURL(file);
+    }
+</script>
+</body>
+</html>

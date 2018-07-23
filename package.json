@@ -1,0 +1,21 @@
+{
+  "name": "img-crop-upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "canvas-clip.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node uploadServer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lujinming1/img-crop-upload.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lujinming1/img-crop-upload/issues"
+  },
+  "homepage": "https://github.com/lujinming1/img-crop-upload#readme",
+  "dependencies": {}
+}

@@ -5,7 +5,7 @@
     <title>图片剪裁</title>
     <script type="text/javascript" src="canvas-clip.js"></script>
     <style>
-        .bg{
+        .m-bg{
             display: flex;
             -webkit-box-align: center;
             align-items: center;
@@ -19,7 +19,7 @@
             background: rgba(0,0,0,.3);
             z-index: 500;
         }
-        .box{
+        .m-box{
             position: relative;
             background: #fff;
             width: 700px;
@@ -28,22 +28,27 @@
             padding: 20px;
             box-shadow: 0px 0px 7px 0px;
         }
-        .file-button{
-            padding: 20px 20px 0 20px;
-        }
-        .file-button button{
+        .m-uploadBtn{
+            position: relative;
+            display: block;
+            width: 150px;
             height: 30px;
+            background: #CCC;
+            overflow: hidden;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
         }
-        .file-button input{
+        .m-uploadBtn input{
             position: absolute;
-            z-index: -1;
+            top: -99px;
         }
-        .content{
+        .m-content{
             display: flex;
             height: 450px;
             padding: 10px;
         }
-        .content .original{
+        .m-content .original{
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,22 +58,22 @@
             border-right: 1px solid silver;
             padding-top: 10px;
         }
-        .content .preview-box{
+        .m-content .preview-box{
             display: flex;
             align-items: center;
             justify-content: center;
             width: 250px;
         }
-        .content .preview-box .preview{
+        .m-content .preview-box .preview{
             width: 200px;
             height: 200px;
         }
-        .button-box{
+        .m-buttonBox{
             position: absolute;
             right: 100px;
             margin-top: 5px;
         }
-        .button-box button{
+        .m-buttonBox button{
             height: 25px;
             margin-left: 20px;
         }
@@ -86,14 +91,14 @@
     </style>
 </head>
 <body>
-    <div class="bg">
-        <div class="box">
+    <div class="m-bg">
+        <div class="m-box">
             <i class="close-btn"></i>
-            <div class="file-button">
-                <button onclick="chooseImg()">选择本地照片</button>
-                <input id="imgInput" type="file">
-            </div>
-            <div class="content">
+            <label class="m-uploadBtn">
+                <span>选择本地照片</span>
+                <input id="imgInput" type="file" accept="image/*">
+            </label>
+            <div class="m-content">
                 <div class="original">
                     <img class="placeholder" src="" height="200" width="200">
                 </div>
@@ -102,16 +107,14 @@
                 </div>
 
             </div>
-            <div class="button-box">
+            <div class="m-buttonBox">
                 <button class="confirm">确认</button>
                 <button class="cancel">取消</button>
             </div>
         </div>
     </div>
     <script>
-		function chooseImg(){
-			document.getElementById('imgInput').click();
-        }
+
         var c;
 		imgInput.onchange = function(){
 			var file = this.files[0];
@@ -120,7 +123,7 @@
 					alert('不是图片');
 					return false;
 				}
-				document.querySelector('.placeholder').style.display = 'none';
+				document.querySelector('.placeholder').hidden = true;
 			}else{
 				return false;
             }
