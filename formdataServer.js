@@ -22,7 +22,7 @@ formdataServer.on('request', (req, res) =>{
 
 function parseFile(req, res){
     res.setHeader('Content-Type', 'text/html;charset=UTF-8');
-    req.setEncoding('binary');
+    req.setEncoding('binary');  // 一定要设置response的编码为binary否则会图片打不开
 
     var body = '';
     var fileName = '';
