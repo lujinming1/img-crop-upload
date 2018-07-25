@@ -30,7 +30,7 @@
 
         var xhr = new XMLHttpRequest();
 
-        // xhr.addEventListener("progress", (e) => {
+        // xhr.addEventListener("progress", (e) => { // 这里监听的是 Response Header 中的 Content-Length 的值，即下载时的进度
         //     if(e.lengthComputable){
         //         console.log(e.total);
         //         console.log(e.loaded);
