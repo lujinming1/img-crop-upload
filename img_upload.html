@@ -48,6 +48,12 @@
             console.log(pe);
         };
 
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === 4 ){
+                alert(xhr.responseText);
+            }
+        }
+
 
         var formData = new FormData();
         formData.append('file', file);
