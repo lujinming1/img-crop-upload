@@ -16,6 +16,8 @@ formdataServer.on('request', (req, res) =>{
         } else {
             res.end('其他方式提交');
         }
+    } else {
+        sendHTML(req, res);
     }
 
 });
@@ -62,6 +64,19 @@ function parseFile(req, res){
         }else{
             res.end('只能上传图片');
         }
+    })
+
+}
+
+function sendHTML(req, res){
+    res.setHeader('Content-Type', 'text/html,charset=utf-8');
+    let readStream = fs.createReadStream('./img_upload.html');
+    readStream.pipe(res);
+    readStream.on('end', (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.end();
     })
 
 }

@@ -5,9 +5,16 @@
     <title>FileReaderTest</title>
 </head>
 <body>
-<input type="file" id="formData" accept="image/*">
-<img src="" id="preview" alt="" style="display:block">
-<input type="file" id="fileReader" accept="image/*">
+<div>
+    <h3>FormData Upload</h3>
+    <input type="file" id="formData" accept="image/*">
+    <progress id="progress"></progress>
+</div>
+<div>
+    <h3>FileRead Upload</h3>
+    <input type="file" id="fileReader" accept="image/*">
+    <img src="" id="preview" alt="" style="display:block">
+</div>
 <script>
     formData.onchange = function(e){
 		var file = this.files[0];
@@ -19,7 +26,27 @@
 			return false;
         }
 
+        var progressBar = document.getElementById('progress');
+
         var xhr = new XMLHttpRequest();
+
+        // xhr.addEventListener("progress", (e) => {
+        //     if(e.lengthComputable){
+        //         console.log(e.total);
+        //         console.log(e.loaded);
+        //     }
+        // }, false);
+        xhr.upload.onprogress = (pe) => {  // 注意一定要将事件绑定在xhr.upload上面
+            if(pe.lengthComputable){
+                progressBar.value = pe.loaded;
+                progressBar.max = pe.total;
+                console.log(pe);
+            }
+        };
+        xhr.upload.onloadend = (pe) => {
+            progressBar.value = pe.loaded;
+            console.log(pe);
+        };
 
 
         var formData = new FormData();
